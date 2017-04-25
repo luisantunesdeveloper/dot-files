@@ -14,6 +14,21 @@ set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 " detect filetype and indent
 filetype plugin indent on
 
+" auto complete
+filetype plugin on
+"set omnifunc=syntaxcomplete#Complete
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" remap code autocompletion
+inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
+            \ "\<lt>C-n>" :
+            \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
+            \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
+            \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
+imap <C-@> <C-Space>
+" autocomplete for commands
+set wildmode=longest,list,full
+set wildmenu
+
 " if not using vim plug enable this
 syntax enable
 
@@ -64,6 +79,13 @@ nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 
+" remap the Tab key for browsing between buffers
+function! SwitchTabs()
+    b#
+endfunction
+
+nmap <Tab> :call SwitchTabs()<CR>
+
 " Lets start installing plugins with VimPlug
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -71,6 +93,22 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+
+" The Silver Searcher
+if executable('ag')
+    " Use ag over grep
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    " Use ag in CtrlP for listing files. Lightning fast and respects
+    " .gitignore
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+    " ag is fast enough that CtrlP doesn't need to cache
+    let g:ctrlp_use_caching = 0
+endif
+
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " Specify a directory for plugins 
 call plug#begin('~/.vim/plugged')
@@ -100,6 +138,9 @@ Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 " syntax for json
 Plug 'leshill/vim-json'
 
+" syntax for pug
+Plug 'digitaltoad/vim-pug'
+
 " color scheme
 Plug 'crusoexia/vim-monokai'
 
@@ -113,7 +154,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'moll/vim-node'
 
 " Enable more Javascript support
-"Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+" Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 
 " add upgraded status bar at the bottom 
 Plug 'vim-airline/vim-airline'
@@ -145,3 +186,6 @@ let g:airline#extensions#tabline#enabled = 1
 " syntastic eslint
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
+
+" Store swap files in fixed location, not current directory.
+set dir=~/.vimswap//,/var/tmp//,/tmp//,.

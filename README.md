@@ -1,6 +1,7 @@
 # Basic usage 
-To use it please rename vimrc for .vimrc and place under your user directory  
-  
+To use it please rename vimrc for .vimrc and place under your user directory.    
+TMUX config is also included. Configurations are self explanatory.  
+
 # Some VIM Syntax  
   
 ## verbs    
@@ -101,6 +102,7 @@ tX  til next 'X' (similar to above, but cursor is before X)
 TX  til previous 'X'  
 ;   repeat above, in same direction  
 ,   repeat above, in reverse direction  
+C-R X - Finds the correspondent record (X) within / for example
 
 ## commands
 :g// runs a command in each line following a pattern
