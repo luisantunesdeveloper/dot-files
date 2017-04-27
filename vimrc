@@ -165,6 +165,9 @@ Plug 'tpope/vim-repeat'
 " syntatic checker
 Plug 'vim-syntastic/syntastic'
 
+" add comments plugin
+Plug 'scrooloose/nerdcommenter'
+
 " add git support
 "Plug 'jreybert/vimagit'
 
