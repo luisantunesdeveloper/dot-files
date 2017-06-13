@@ -1,12 +1,21 @@
 " the globber in the search
 set path+=**
 
+" set paste mode
+set paste
+
 " do not make vim compatible with vi.
 set nocompatible
 
 " set indentation options
 set autoindent
 set smartindent
+
+" auto format elm code
+let g:elm_format_autosave = 1
+
+" solve backspace problem
+set backspace=indent,eol,start
 
 " set indentation config
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
@@ -62,6 +71,12 @@ map <f6> :w <CR>:!bash % <CR>
 " turn on syntax hightlighting.
 set syntax=on
 
+" copy registers
+noremap <Leader>y "*y
+noremap <Leader>p "*p
+noremap <Leader>Y "+y
+noremap <Leader>P "+p
+
 " configure tabs
 nnoremap th  :tabfirst<CR>
 nnoremap tj  :tabnext<CR>
@@ -85,6 +100,12 @@ function! SwitchTabs()
 endfunction
 
 nmap <Tab> :call SwitchTabs()<CR>
+
+" add buffer number to the tab
+let g:bufferline_echo=0
+let g:bufferline_show_bufnr = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+au BufWinEnter * set number
 
 " Lets start installing plugins with VimPlug
 
@@ -187,6 +208,12 @@ Plug 'vim-syntastic/syntastic'
 " add comments plugin
 Plug 'scrooloose/nerdcommenter'
 
+" add buffer info 
+Plug 'bling/vim-bufferline'
+
+" add elm support
+Plug 'elmcast/elm-vim'
+
 " add git support
 "Plug 'jreybert/vimagit'
 
@@ -211,3 +238,12 @@ let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
 
 " Store swap files in fixed location, not current directory.
 set dir=~/.vimswap//,/var/tmp//,/tmp//,.
+
+" fix system clipboard interaction
+" yank to clipboard
+if has("clipboard")
+    set clipboard=unnamed " copy to the system clipboard
+    if has("unnamedplus") " X11 support
+        set clipboard+=unnamedplus
+    endif
+endif
