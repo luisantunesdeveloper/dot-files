@@ -2,7 +2,9 @@
 set path+=**
 
 " set paste mode
-set paste
+"set paste
+" the previous command conflicts with YouCompleteMe and almost all the other
+" auto complete plugins
 
 " do not make vim compatible with vi.
 set nocompatible
@@ -25,15 +27,7 @@ filetype plugin indent on
 
 " auto complete
 filetype plugin on
-"set omnifunc=syntaxcomplete#Complete
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-" remap code autocompletion
-inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
-            \ "\<lt>C-n>" :
-            \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
-            \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
-            \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
-imap <C-@> <C-Space>
+
 " autocomplete for commands
 set wildmode=longest,list,full
 set wildmenu
@@ -214,8 +208,8 @@ Plug 'bling/vim-bufferline'
 " add elm support
 Plug 'elmcast/elm-vim'
 
-" add git support
-"Plug 'jreybert/vimagit'
+" add java autocomplete support
+Plug 'Valloric/YouCompleteMe'
 
 call plug#end()
 
