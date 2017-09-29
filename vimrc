@@ -208,8 +208,9 @@ Plug 'bling/vim-bufferline'
 " add elm support
 Plug 'elmcast/elm-vim'
 
-" add java autocomplete support
-Plug 'Valloric/YouCompleteMe'
+" add java, elixir you complete me support
+Plug 'Valloric/YouCompleteMe', { 'do': 'python ./install.py', 'for': ['ruby', 'eruby'] }
+Plug 'elixir-lang/vim-elixir'
 
 call plug#end()
 
