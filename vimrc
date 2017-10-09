@@ -9,6 +9,9 @@ set path+=**
 " do not make vim compatible with vi.
 set nocompatible
 
+" changes directory to the files dirname
+set autochdir
+
 " set indentation options
 set autoindent
 set smartindent
@@ -187,9 +190,6 @@ Plug 'junegunn/fzf.vim'
 " Jumps through common js modules
 Plug 'moll/vim-node'
 
-" Enable more Javascript support
-" Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-
 " add upgraded status bar at the bottom 
 Plug 'vim-airline/vim-airline'
 
@@ -212,6 +212,15 @@ Plug 'elmcast/elm-vim'
 Plug 'Valloric/YouCompleteMe', { 'do': 'python ./install.py', 'for': ['ruby', 'eruby'] }
 Plug 'elixir-lang/vim-elixir'
 
+" vertical line indentation
+Plug 'nathanaelkane/vim-indent-guides'
+
+" plugin managing tab
+Plug 'ervandew/supertab'
+
+" plugin to manage automatic closing of quotes, etc
+Plug 'Raimondi/delimitMate'
+
 call plug#end()
 
 " configure color scheme  
@@ -227,7 +236,7 @@ colorscheme monokai
 " display all buffers when only tab open vim-airline option
 let g:airline#extensions#tabline#enabled = 1
 
-" syntastic eslint
+" syntastic javascript
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
 
