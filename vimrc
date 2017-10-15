@@ -10,7 +10,7 @@ set path+=**
 set nocompatible
 
 " changes directory to the files dirname
-set autochdir
+"set autochdir
 
 " set indentation options
 set autoindent
@@ -30,6 +30,7 @@ filetype plugin indent on
 
 " auto complete
 filetype plugin on
+set omnifunc=syntaxcomplete#Complete
 
 " autocomplete for commands
 set wildmode=longest,list,full
@@ -212,6 +213,9 @@ Plug 'elmcast/elm-vim'
 Plug 'Valloric/YouCompleteMe', { 'do': 'python ./install.py', 'for': ['ruby', 'eruby'] }
 Plug 'elixir-lang/vim-elixir'
 
+" auto complete for vim (java)
+"let g:EclimCompletionMethod = 'omnifunc'
+
 " vertical line indentation
 Plug 'nathanaelkane/vim-indent-guides'
 
@@ -220,6 +224,13 @@ Plug 'ervandew/supertab'
 
 " plugin to manage automatic closing of quotes, etc
 Plug 'Raimondi/delimitMate'
+
+" plugin to browse ctags
+Plug 'majutsushi/tagbar'
+nmap <F8> :TagbarToggle<CR>
+
+" plugin to manage vim sessions
+Plug 'mhinz/vim-startify'
 
 call plug#end()
 
