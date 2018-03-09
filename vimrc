@@ -1,3 +1,6 @@
+" deactivate read only mode
+set noreadonly
+
 " the globber in the search
 set path+=**
 
@@ -160,6 +163,7 @@ Plug 'tpope/vim-haml'
 
 " On-demand loading the tree plugin
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+let NERDTreeShowHidden = 1
 
 " Edit surroundings of a text
 Plug 'tpope/vim-surround'
@@ -231,8 +235,35 @@ nmap <F8> :TagbarToggle<CR>
 
 " plugin to manage vim sessions
 Plug 'mhinz/vim-startify'
+let g:startify_change_to_dir = 0
 
 call plug#end()
+
+"
+" install reason/ocaml support
+" 
+Plug 'reasonml-editor/vim-reason-plus'
+
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
+" (Optional) Multi-entry selection UI.
+Plug 'junegunn/fzf'
+
+let g:LanguageClient_serverCommands = {
+    \ 'reason': ['ocaml-language-server', '--stdio'],
+    \ 'ocaml': ['ocaml-language-server', '--stdio'],
+    \ }
+
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
+"
+" end of install reason/ocaml support
+" 
 
 " configure color scheme  
 " this has to be after the plugin activation
