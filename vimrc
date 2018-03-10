@@ -263,7 +263,11 @@ nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 "
 " end of install reason/ocaml support
-" 
+"
+
+" rust lang support syntax
+Plug 'rust-lang/rust.vim'
+let g:rustfmt_autosave = 1
 
 " configure color scheme  
 " this has to be after the plugin activation
